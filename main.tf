@@ -3,7 +3,7 @@ data "aws_s3_bucket" "backup_bucket" {
 }
 
 module "backup_task" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/base/"
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/base/?ref=v1.0"
 
   environment_variables = {
     "SLACK_WEBHOOK_URL" = "${var.slack_webhook_url}"
@@ -78,7 +78,7 @@ resource "aws_iam_role_policy" "backup_bucket_access" {
 }
 
 module "backup" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/scheduled/"
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/scheduled/?ref=v1.0"
 
   family              = "${var.prefix}-backup-${var.backup_identifier}"
   task_role_name      = "${module.backup_task.role_name}"
